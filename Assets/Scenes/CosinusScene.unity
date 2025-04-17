@@ -317,7 +317,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -405,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 461648469}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: 0}
+  m_LocalPosition: {x: 0, y: 5.08, z: 0}
   m_LocalScale: {x: 6, y: 1, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461648469}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c7e89a22cda9749a279b83486869e3, type: 3}
   m_Name: 
@@ -441,10 +441,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertices: []
-  windSpeedScale: 1
   xScale: 1
   speed: 1
-  directionVector: {x: 0, y: 0, z: 10}
+  directionVector: {x: 1, y: 0, z: 0}
 --- !u!1 &534333611
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1788743189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,7 +1011,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertices: []
-  windSpeedScale: 1
   xScale: 1
   speed: 1
   directionVector: {x: 0, y: 0, z: 10}
