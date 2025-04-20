@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BrushlessMotor : MonoBehaviour
+public class BrushlessMotor : MonoBehaviour, IPWMMotor
 {
     [Header("Silnik")]
     [SerializeField] private float kv = 1000f;              // rpm/V
@@ -11,7 +11,7 @@ public class BrushlessMotor : MonoBehaviour
 
     [Header("Sterowanie")]
     [Range(0f, 1f)]
-    public float pwmInput = 0f;
+    [SerializeField] private float pwmInput = 0f;
 
     private Rigidbody rb;
     private float currentRPM;
@@ -30,7 +30,7 @@ public class BrushlessMotor : MonoBehaviour
         float normalizedPower = Mathf.Pow(currentRPM / maxRPM, 2);
         float thrust = normalizedPower * maxThrust * thrustCoefficient;
 
-        Vector3 force = transform.forward * thrust;
+        Vector3 force = transform.forward * thrust * Time.fixedDeltaTime;
         rb.AddForce(force);
     }
 

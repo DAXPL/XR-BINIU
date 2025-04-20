@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 126148743}
   - component: {fileID: 126148742}
   - component: {fileID: 126148741}
-  - component: {fileID: 126148740}
+  - component: {fileID: 126148747}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -141,23 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &126148740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126148739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96db65a834b82724797812438cbde5e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveAction: {fileID: -1680190386980627800, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
-  leftMotor: {fileID: 758591352}
-  rightMotor: {fileID: 2109797747}
-  basePower: 0.5
-  turnPowerFactor: 0.5
 --- !u!114 &126148741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +278,22 @@ Transform:
   - {fileID: 758591358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &126148747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126148739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8071578d55a39454788897094a0524eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logic: {fileID: 11400000, guid: 6fa5118610141cf4790373d98cc3b64b, type: 2}
+  motorBehaviours:
+  - {fileID: 758591352}
+  - {fileID: 2109797747}
 --- !u!1 &181716489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1239,7 @@ GameObject:
   - component: {fileID: 758591352}
   - component: {fileID: 758591353}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Cube (left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1260,7 +1259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kv: 1000
   voltage: 12
-  maxThrust: 10
+  maxThrust: 1000
   thrustCoefficient: 1
   pwmInput: 0
 --- !u!138 &758591353
@@ -1615,7 +1614,7 @@ GameObject:
   - component: {fileID: 2109797747}
   - component: {fileID: 2109797748}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Cube (right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1635,7 +1634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kv: 1000
   voltage: 12
-  maxThrust: 10
+  maxThrust: 1000
   thrustCoefficient: 1
   pwmInput: 0
 --- !u!138 &2109797748
