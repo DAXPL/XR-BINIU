@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface ISensor
 {
-    object ReadData();
+    public object ReadData();
+    public string GetDeviceName();
 }

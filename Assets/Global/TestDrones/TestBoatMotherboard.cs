@@ -12,6 +12,12 @@ public class TestBoatMotherboard : DroneLogic
 
     public override void Think(Breadboard board, float deltaTime)
     {
+        for(int i = 0; i < board.GetSensorCount(); i++)
+        {
+            object data = board.GetSensorData(i);
+        }
+
+
         Vector2 input = Vector2.zero;
         if (moveAction != null) input = moveAction.action.ReadValue<Vector2>();
         float forward = Mathf.Max(0f, input.y);
@@ -20,7 +26,7 @@ public class TestBoatMotherboard : DroneLogic
         float leftPWM = Mathf.Clamp01(forward + turn * turnPowerFactor);
         float rightPWM = Mathf.Clamp01(forward - turn * turnPowerFactor);
 
-        leftPWM = Mathf.Lerp(0f, 1f, leftPWM);  // brak basePower
+        leftPWM = Mathf.Lerp(0f, 1f, leftPWM);
         rightPWM = Mathf.Lerp(0f, 1f, rightPWM);
 
         board.SetMotorPWM(0, leftPWM);

@@ -5,7 +5,7 @@ public class Breadboard : MonoBehaviour
 {
     public DroneLogic logic;
 
-    [Header("Outputs")]
+    [Header("Devices")]
     [SerializeField] private MonoBehaviour[] devices;
     private List<IPWMMotor> motors = new List<IPWMMotor>();
     private List<ISensor> sensors = new List<ISensor>();
