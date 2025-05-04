@@ -44,4 +44,9 @@ public class StepperMotor : MonoBehaviour, IPWMMotor
     {
         controlSignal = Mathf.Clamp01(value);
     }
+
+    public float GetPWM()
+    {
+        return controlSignal;
+    }
 }

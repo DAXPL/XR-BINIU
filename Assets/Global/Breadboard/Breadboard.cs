@@ -9,6 +9,7 @@ public class Breadboard : MonoBehaviour
     [SerializeField] private MonoBehaviour[] devices;
     private List<IPWMMotor> motors = new List<IPWMMotor>();
     private List<ISensor> sensors = new List<ISensor>();
+    private bool externalLogic = false;
     private void Awake()
     {
         for (int i = 0; i < devices.Length; i++)
@@ -24,7 +25,7 @@ public class Breadboard : MonoBehaviour
 
     private void Update()
     {
-        if (logic) logic.Think(this, Time.deltaTime);
+        if (logic && !externalLogic) logic.Think(this, Time.deltaTime);
     }
 
     public void SetMotorPWM(int index, float value)
@@ -48,5 +49,23 @@ public class Breadboard : MonoBehaviour
     public int GetMotorCount()
     {
         return motors.Count;
+    }
+
+    public bool GetControll()
+    {
+        if(externalLogic)
+        {
+            return false;
+        }
+        else
+        {
+            externalLogic = true;
+            return true;
+        }
+    }
+
+    public void Release()
+    {
+        externalLogic = false;
     }
 }

@@ -43,4 +43,9 @@ public class BrushlessMotor : MonoBehaviour, IPWMMotor
     {
         return Mathf.Pow(pwmInput * kv * voltage / (kv * voltage), 2) * maxThrust;
     }
+
+    public float GetPWM()
+    {
+        return pwmInput;
+    }
 }

@@ -10,21 +10,29 @@ public class BoatWIFIdriver : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference gearUp;
+    [SerializeField] private InputActionReference gearDown;
     [SerializeField] private GameObject connectionPanel;
 
-    Vector2 movementVector = Vector2.zero;
+    [SerializeField] private Vector2 movementVector = Vector2.zero;
+    [SerializeField] private int gear = 5;
     private ClientWebSocket ws; // WebSocket client
-    public string serverAddress = "ws://192.168.137.134:81"; // Adres ESP32 (IP i port)
+    public string serverAddress = "ws://192.168.137.129"; // Adres ESP32 (IP i port)
+    public int port = 80;
     private CancellationTokenSource cts;
 
     private void Start()
     {
         Application.targetFrameRate = 60;
+        if (gearUp) gearUp.action.performed += ctx => { gear++; gear = (byte)Mathf.Clamp(gear, 0, 10); };
+        if (gearDown) gearDown.action.performed += ctx => { gear--; gear = (byte)Mathf.Clamp(gear, 0, 10); };
     }
 
     public void Update()
     {
-        movementVector = moveAction.action.ReadValue<Vector2>();
+        Vector2 mov = moveAction.action.ReadValue<Vector2>();
+        mov = new Vector2(MathF.Round(mov.x / 10.0f * gear, 2), MathF.Round(mov.y / 10.0f * gear, 2));
+        movementVector = mov;
     }
 
     void OnApplicationQuit()
@@ -37,7 +45,7 @@ public class BoatWIFIdriver : MonoBehaviour
 
     public void UpdateIP(string newIp)
     {
-        serverAddress = $"ws://{newIp}:81";
+        serverAddress = $"{newIp}";
     }
 
     [ContextMenu("Connect")]
@@ -45,7 +53,7 @@ public class BoatWIFIdriver : MonoBehaviour
     {
         ws = new ClientWebSocket();
         cts = new CancellationTokenSource();
-        ConnectAsync().ConfigureAwait(false); 
+        ConnectAsync().ConfigureAwait(false);
     }
 
     private async void ReceiveMessagesAsync()
@@ -74,13 +82,15 @@ public class BoatWIFIdriver : MonoBehaviour
     {
         try
         {
-            await ws.ConnectAsync(new Uri(serverAddress), cts.Token);
+            string uri = $"ws://{serverAddress}:{port}";
+            Debug.Log($"Connecting to {uri}");
+            await ws.ConnectAsync(new Uri(uri), cts.Token);
             Debug.Log("Po³¹czenie z ESP32 otwarte!");
             if (connectionPanel) connectionPanel.SetActive(false);
 
-            // Start listening for messages from WebSocket
-            ReceiveMessagesAsync();
-            ValueLoopAsync();
+            // Uruchom pêtle w tle
+            _ = Task.Run(() => ReceiveMessagesAsync());
+            _ = Task.Run(() => ValueLoopAsync());
         }
         catch (Exception e)
         {
@@ -103,12 +113,20 @@ public class BoatWIFIdriver : MonoBehaviour
         }
     }
 
-    private async Task SendData(float value1, float value2)
+    private async Task SendData(float forwardBackValue, float leftRightValue)
     {
         if (ws == null || ws.State != WebSocketState.Open)
             return;
 
-        LedData data = new LedData { led1 = Mathf.Clamp01(value1), led2 = Mathf.Clamp01(-value1), led3 = Mathf.Clamp01(value2) };
+        ControlWrapper data = new ControlWrapper
+        {
+            sterowanie = new MotorData
+            {
+                forwordBack = forwardBackValue,
+                leftRight = leftRightValue
+            }
+        };
+
         string jsonMessage = JsonUtility.ToJson(data);
         byte[] buffer = Encoding.UTF8.GetBytes(jsonMessage);
 
@@ -123,9 +141,14 @@ public class BoatWIFIdriver : MonoBehaviour
     }
 }
 [System.Serializable]
-public class LedData
+public class ControlWrapper
 {
-    public float led1;
-    public float led2;
-    public float led3;
+    public MotorData sterowanie;
+}
+
+[System.Serializable]
+public class MotorData
+{
+    public float forwordBack;
+    public float leftRight;
 }
