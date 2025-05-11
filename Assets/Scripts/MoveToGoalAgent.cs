@@ -2,15 +2,14 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using System;
+using System.Collections;
 
 public class MoveToGoalAgent : Agent {
-    [SerializeField] private Transform goalTransform;
-    [SerializeField] private Material winMaterial;
-    [SerializeField] private Material loseMaterial;
-    [SerializeField] private MeshRenderer floorMeshRenderer;
     [SerializeField] private Checkpoints checkpoints;
     private Transform spawnPos;
-    private Car car;
+    private Vector3 spawnPosVector3;
+    [SerializeField] private Car car;
 
     private void Awake() {
         car = GetComponent<Car>();
@@ -18,28 +17,46 @@ public class MoveToGoalAgent : Agent {
 
     private void Start() {
         spawnPos = transform;
+        spawnPosVector3 = transform.position;
         checkpoints.OnCarCorrectCheckpoint += CorrectCheckpoint;
         checkpoints.OnCarWrongCheckpoint += WrongCheckpoint;
+        StartCoroutine(CountDistance());
     }
 
-    private void CorrectCheckpoint() {
-        AddReward(1f);
+    private void CorrectCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
+        if (e.carTransform == transform) {
+            AddReward(10f);
+        }
     }
 
-    private void WrongCheckpoint() {
-
-        AddReward(-1f);
+    private void WrongCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
+        if (e.carTransform == transform) {
+            AddReward(-10f);
+        }
     }
+
+    Vector3 lastPosition;
+    IEnumerator CountDistance() {
+        while (true) {
+            lastPosition = transform.position;
+            yield return new WaitForSeconds(1);
+            if (Vector3.Distance(transform.position, lastPosition) < 2) {
+                AddReward(-100f);
+            }
+        }
+    }
+
 
     public override void OnEpisodeBegin() {
-        transform.position = spawnPos.position;
+        lastPosition = transform.position;
+        transform.position = spawnPosVector3;
         transform.forward = spawnPos.forward;
-        checkpoints.ResetCheckpoint();
+        checkpoints.ResetCheckpoint(transform);
         car.Stop();
     }
 
     public override void CollectObservations(VectorSensor sensor) {
-        Vector3 checkpointForward = checkpoints.GetNextCheckpoint();
+        Vector3 checkpointForward = checkpoints.GetNextCheckpoint(transform).transform.forward;
         float directionDot = Vector3.Dot(transform.forward, checkpointForward);
         sensor.AddObservation(directionDot);
     }
@@ -50,55 +67,53 @@ public class MoveToGoalAgent : Agent {
 
         switch (actions.DiscreteActions[0]) {
             case 0:
-                forwardAmount = 0;
+            forwardAmount = 0;
             break;
 
             case 1:
-                forwardAmount = 1;
+            forwardAmount = 1;
             break;
 
             case 2:
-                forwardAmount = -1;
+            forwardAmount = -1;
             break;
         }
-        
+
         switch (actions.DiscreteActions[1]) {
             case 0:
-                turnAmount = 0;
+            turnAmount = 0;
             break;
 
             case 1:
-                turnAmount = 1;
+            turnAmount = 1;
             break;
 
             case 2:
-                turnAmount = -1;
+            turnAmount = -1;
             break;
         }
 
         car.Drive(forwardAmount, turnAmount);
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut) {
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-
-        continuousActions[0] = Input.GetAxisRaw("Horizontal");
-        continuousActions[1] = Input.GetAxisRaw("Vertical");
-    }
-
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.TryGetComponent(out Wall _)) {
-            AddReward(-0.5f);
+            AddReward(-10f);
         }
 
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        if (collision.gameObject.TryGetComponent(out Wall _)) {
+            AddReward(5f);
+        }
     }
 
 
     private void OnCollisionStay(Collision collision) {
         if (collision.gameObject.TryGetComponent(out Wall _)) {
-            AddReward(-0.1f);
+            AddReward(-5f);
         }
     }
-
 }
