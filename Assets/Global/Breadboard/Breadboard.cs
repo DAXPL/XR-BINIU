@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Breadboard : MonoBehaviour
 {
-    public DroneLogic logic;
+    [SerializeField] private DroneLogic logic;
 
     [Header("Devices")]
     [SerializeField] private MonoBehaviour[] devices;

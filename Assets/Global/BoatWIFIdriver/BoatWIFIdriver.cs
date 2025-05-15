@@ -1,17 +1,22 @@
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static esp32Controller;
 
 public class BoatWIFIdriver : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference gearUp;
-    [SerializeField] private InputActionReference gearDown;
+    //[SerializeField] private InputActionReference moveAction;
+    //[SerializeField] private InputActionReference gearUp;
+    //[SerializeField] private InputActionReference gearDown;
     [SerializeField] private GameObject connectionPanel;
 
     [SerializeField] private Vector2 movementVector = Vector2.zero;
@@ -20,19 +25,21 @@ public class BoatWIFIdriver : MonoBehaviour
     public string serverAddress = "ws://192.168.137.129"; // Adres ESP32 (IP i port)
     public int port = 80;
     private CancellationTokenSource cts;
+    [SerializeField] private VirtualBreadboard breadboard;
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
-        if (gearUp) gearUp.action.performed += ctx => { gear++; gear = (byte)Mathf.Clamp(gear, 0, 10); };
-        if (gearDown) gearDown.action.performed += ctx => { gear--; gear = (byte)Mathf.Clamp(gear, 0, 10); };
+        //if (gearUp) gearUp.action.performed += ctx => { gear++; gear = (byte)Mathf.Clamp(gear, 0, 10); };
+        //if (gearDown) gearDown.action.performed += ctx => { gear--; gear = (byte)Mathf.Clamp(gear, 0, 10); };
     }
 
     public void Update()
     {
+        /*
         Vector2 mov = moveAction.action.ReadValue<Vector2>();
         mov = new Vector2(MathF.Round(mov.x / 10.0f * gear, 2), MathF.Round(mov.y / 10.0f * gear, 2));
         movementVector = mov;
+        */
     }
 
     void OnApplicationQuit()
@@ -56,6 +63,35 @@ public class BoatWIFIdriver : MonoBehaviour
         ConnectAsync().ConfigureAwait(false);
     }
 
+    private void ProcessSensorData(string json)
+    {
+        List<float> floats = new List<float>();
+        try
+        {
+            SensorDataWrapper data = JsonConvert.DeserializeObject<SensorDataWrapper>(json);
+            if (data != null && data.sensor != null)
+            {
+                if (breadboard)
+                {
+                    breadboard.SetSensorData(0, data.sensor.temperature);
+                    breadboard.SetSensorData(1, data.sensor.humidity);
+                    breadboard.SetSensorData(2, (data.sensor.lightT == true) ? 1 : 0);
+                    breadboard.SetSensorData(3, data.sensor.distance.front);
+                    breadboard.SetSensorData(4, data.sensor.distance.left);
+                    breadboard.SetSensorData(5, data.sensor.distance.right);
+                    breadboard.SetSensorData(6, data.sensor.pressure);
+                    breadboard.SetSensorData(7, data.sensor.alX);
+                    breadboard.SetSensorData(8, data.sensor.alY);
+                    breadboard.SetSensorData(9, data.sensor.alZ);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("B³¹d JSON: " + e.Message + " | Otrzymano: " + json);
+        }
+    }
+
     private async void ReceiveMessagesAsync()
     {
         byte[] buffer = new byte[1024];
@@ -70,6 +106,8 @@ public class BoatWIFIdriver : MonoBehaviour
                     Debug.Log("Po³¹czenie zamkniête.");
                     if (connectionPanel) connectionPanel.SetActive(true);
                 }
+                string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                ProcessSensorData(message);
             }
             catch (Exception e)
             {
@@ -140,6 +178,7 @@ public class BoatWIFIdriver : MonoBehaviour
         }
     }
 }
+
 [System.Serializable]
 public class ControlWrapper
 {
