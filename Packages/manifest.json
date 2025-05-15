@@ -2,6 +2,7 @@
   "dependencies": {
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.development": "1.0.2",
+    "com.unity.feature.vr": "1.0.1",
     "com.unity.inputsystem": "1.13.1",
     "com.unity.ml-agents": "3.0.0",
     "com.unity.multiplayer.center": "1.0.0",
