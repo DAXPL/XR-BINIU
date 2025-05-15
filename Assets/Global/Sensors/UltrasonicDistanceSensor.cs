@@ -42,4 +42,9 @@ public class UltrasonicDistanceSensor : MonoBehaviour, ISensor
         Gizmos.DrawLine(transform.position, endPoint);
         Gizmos.DrawWireSphere(endPoint, 0.05f);
     }
+
+    public void SetData(object value)
+    {
+        Debug.LogWarning("Ultrasonic sensor does not support setting data.");
+    }
 }

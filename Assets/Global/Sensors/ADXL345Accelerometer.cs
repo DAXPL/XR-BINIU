@@ -36,6 +36,11 @@ public class ADXL345Accelerometer : MonoBehaviour, ISensor
         return "ADXL345";
     }
 
+    public void SetData(object value)
+    {
+        Debug.LogWarning("ADXL345Accelerometer sensor does not support setting data.");
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

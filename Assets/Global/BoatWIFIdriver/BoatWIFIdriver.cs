@@ -2,6 +2,7 @@ using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -9,38 +10,19 @@ using System.Threading.Tasks;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static esp32Controller;
 
 public class BoatWIFIdriver : MonoBehaviour
 {
     [Header("UI")]
-    //[SerializeField] private InputActionReference moveAction;
-    //[SerializeField] private InputActionReference gearUp;
-    //[SerializeField] private InputActionReference gearDown;
     [SerializeField] private GameObject connectionPanel;
 
-    [SerializeField] private Vector2 movementVector = Vector2.zero;
+
     [SerializeField] private int gear = 5;
     private ClientWebSocket ws; // WebSocket client
-    public string serverAddress = "ws://192.168.137.129"; // Adres ESP32 (IP i port)
+    public string serverAddress = "ws://192.168.0.39"; // Adres ESP32 (IP i port)
     public int port = 80;
     private CancellationTokenSource cts;
-    [SerializeField] private VirtualBreadboard breadboard;
-
-    private void Start()
-    {
-        //if (gearUp) gearUp.action.performed += ctx => { gear++; gear = (byte)Mathf.Clamp(gear, 0, 10); };
-        //if (gearDown) gearDown.action.performed += ctx => { gear--; gear = (byte)Mathf.Clamp(gear, 0, 10); };
-    }
-
-    public void Update()
-    {
-        /*
-        Vector2 mov = moveAction.action.ReadValue<Vector2>();
-        mov = new Vector2(MathF.Round(mov.x / 10.0f * gear, 2), MathF.Round(mov.y / 10.0f * gear, 2));
-        movementVector = mov;
-        */
-    }
+    [SerializeField] private Breadboard breadboard;
 
     void OnApplicationQuit()
     {
@@ -65,24 +47,14 @@ public class BoatWIFIdriver : MonoBehaviour
 
     private void ProcessSensorData(string json)
     {
-        List<float> floats = new List<float>();
         try
         {
-            SensorDataWrapper data = JsonConvert.DeserializeObject<SensorDataWrapper>(json);
-            if (data != null && data.sensor != null)
+            List<float?> values = JsonConvert.DeserializeObject<List<float?>>(json);
+            if (values != null)
             {
-                if (breadboard)
+                for (int i = 0;i < values.Count; i++)
                 {
-                    breadboard.SetSensorData(0, data.sensor.temperature);
-                    breadboard.SetSensorData(1, data.sensor.humidity);
-                    breadboard.SetSensorData(2, (data.sensor.lightT == true) ? 1 : 0);
-                    breadboard.SetSensorData(3, data.sensor.distance.front);
-                    breadboard.SetSensorData(4, data.sensor.distance.left);
-                    breadboard.SetSensorData(5, data.sensor.distance.right);
-                    breadboard.SetSensorData(6, data.sensor.pressure);
-                    breadboard.SetSensorData(7, data.sensor.alX);
-                    breadboard.SetSensorData(8, data.sensor.alY);
-                    breadboard.SetSensorData(9, data.sensor.alZ);
+                    breadboard.SetSensorData(i, values[i] ?? 0f);
                 }
             }
         }
@@ -138,34 +110,26 @@ public class BoatWIFIdriver : MonoBehaviour
 
     private async Task ValueLoopAsync()
     {
-        Vector2 prevInput = Vector2.zero;
         while (ws.State == WebSocketState.Open)
         {
-            float magnitude = (prevInput - movementVector).magnitude;
-            if (magnitude >= 0.1f)
+            if(breadboard == null)
             {
-                prevInput = movementVector;
-                await SendData(movementVector.x, movementVector.y);
-                await Task.Delay(100);
+                await Task.Delay(1000);
+                continue;
             }
+
+            await SendData(new float[] { breadboard.GetMotorPWM(0), breadboard.GetMotorPWM(1) });
+            await Task.Delay(100);
         }
     }
 
-    private async Task SendData(float forwardBackValue, float leftRightValue)
+    private async Task SendData(float[] dataArray)
     {
         if (ws == null || ws.State != WebSocketState.Open)
             return;
 
-        ControlWrapper data = new ControlWrapper
-        {
-            sterowanie = new MotorData
-            {
-                forwordBack = forwardBackValue,
-                leftRight = leftRightValue
-            }
-        };
-
-        string jsonMessage = JsonUtility.ToJson(data);
+        List<float?> values = new List<float?>(dataArray.Cast<float?>());
+        string jsonMessage = JsonConvert.SerializeObject(values);
         byte[] buffer = Encoding.UTF8.GetBytes(jsonMessage);
 
         try
@@ -177,17 +141,4 @@ public class BoatWIFIdriver : MonoBehaviour
             Debug.LogError("B³¹d wysy³ania danych: " + e.Message);
         }
     }
-}
-
-[System.Serializable]
-public class ControlWrapper
-{
-    public MotorData sterowanie;
-}
-
-[System.Serializable]
-public class MotorData
-{
-    public float forwordBack;
-    public float leftRight;
 }

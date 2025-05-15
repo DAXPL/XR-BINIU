@@ -747,6 +747,7 @@ GameObject:
   - component: {fileID: 1328999921}
   - component: {fileID: 1328999920}
   - component: {fileID: 1328999924}
+  - component: {fileID: 1328999925}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -852,11 +853,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPanel: {fileID: 1582458969}
-  movementVector: {x: 0, y: 0}
   gear: 5
-  serverAddress: 192.168.137.188
+  serverAddress: 192.168.0.39
   port: 80
-  breadboard: {fileID: 0}
+  breadboard: {fileID: 1328999925}
+--- !u!114 &1328999925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328999919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8071578d55a39454788897094a0524eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logic: {fileID: 11400000, guid: 6fa5118610141cf4790373d98cc3b64b, type: 2}
+  devices: []
+  virtualSensors:
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  - sensorValue: 0
+  virtualMotors:
+  - pwmValue: 0
+  - pwmValue: 0
 --- !u!1 &1517038848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,63 +1611,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
---- !u!1001 &2106796794
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -40.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 20.415585
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 38.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955887911442160053, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5384076296732787876, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
-      propertyPath: m_Name
-      value: Boat
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e0e64aef1ec76f24a8c1d74099c1fac2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1647,4 +1618,3 @@ SceneRoots:
   - {fileID: 1713103963}
   - {fileID: 1328999923}
   - {fileID: 727742243}
-  - {fileID: 2106796794}
