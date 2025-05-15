@@ -1,10 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
 public class Car : MonoBehaviour {
     private Rigidbody rb;
-    public float speed = 10;
-    public float turnSpeed = 30;
+    public float speed = 20;
+    public float turnSpeed = 20;
     public Checkpoints checkpoints;
 
     private void Awake() {
@@ -16,50 +15,26 @@ public class Car : MonoBehaviour {
         rb.AddForce(speed * forward * transform.forward, ForceMode.Force);
     }
 
-    //private void Start() {
-    //    StartCoroutine(CountDistance());
-    //}
+    //private void Update() {
+    //    if (Input.GetKey("a")) {
+    //        rb.AddTorque(new Vector3(0, -turnSpeed, 0), ForceMode.Force);
+    //    }
 
-    //IEnumerator CountDistance() {
-    //    while (true) {
-    //        Vector3 lastPosition = transform.position;
-    //        yield return new WaitForSeconds(1);
-    //        Debug.Log(Vector3.Distance(transform.position, lastPosition));
+    //    if (Input.GetKey("d")) {
+    //        rb.AddTorque(new Vector3(0, turnSpeed, 0), ForceMode.Force);
+    //    }
+
+    //    if (Input.GetKey("w")) {
+    //        rb.AddForce(transform.forward * speed, ForceMode.Force);
+    //    }
+
+    //    if (Input.GetKey("s")) {
+    //        rb.AddForce(-transform.forward * speed, ForceMode.Force);
     //    }
     //}
-
-    private void Update() {
-        if (Input.GetKey("a")) {
-            rb.AddTorque(new Vector3(0, -turnSpeed, 0), ForceMode.Force);
-        }
-
-        if (Input.GetKey("d")) {
-            rb.AddTorque(new Vector3(0, turnSpeed, 0), ForceMode.Force);
-        }
-
-        if (Input.GetKey("w")) {
-            rb.AddForce(transform.forward * speed, ForceMode.Force);
-        }
-
-        if (Input.GetKey("s")) {
-            rb.AddForce(-transform.forward * speed, ForceMode.Force);
-        }
-    }
 
     public void Stop() {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
-
-    //private void OnTriggerEnter(Collider other) {
-    //    if (other.CompareTag("Checkpoint")) {
-    //        if (other.gameObject == checkpoints.GetNextCheckpointGameobject()) {
-    //            checkpoints.SetNextCheckpoint();
-    //            Debug.Log("Correct");
-    //        } else {
-    //            checkpoints.CarWrongCheckpoint();
-    //            Debug.Log("Wrong");
-    //        }
-    //    }
-    //}
 }

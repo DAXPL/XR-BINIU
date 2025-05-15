@@ -480,8 +480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  turnSpeed: 10
+  speed: 20
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!114 &9599607
 MonoBehaviour:
@@ -498,7 +498,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 9599606}
 --- !u!114 &9599608
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -624,7 +624,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &9599613
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15196,8 +15196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  turnSpeed: 15
+  speed: 20
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!114 &280155242
 MonoBehaviour:
@@ -15214,7 +15214,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 280155241}
 --- !u!114 &280155243
@@ -15287,7 +15287,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -15340,7 +15340,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &280155248
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16329,7 +16329,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 300255906}
 --- !u!114 &300255898
@@ -16357,7 +16357,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -16410,7 +16410,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &300255901
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16537,7 +16537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  turnSpeed: 10
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!1 &300674291
 GameObject:
@@ -42153,6 +42153,7 @@ Transform:
   - {fileID: 924031274}
   - {fileID: 843277665}
   - {fileID: 353690528}
+  - {fileID: 1623530182}
   m_Father: {fileID: 1362687866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731742099
@@ -45496,7 +45497,7 @@ Transform:
   m_GameObject: {fileID: 804800864}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8, y: 0.8, z: 13.61}
+  m_LocalPosition: {x: 2.8, y: 0.8, z: 13.73}
   m_LocalScale: {x: 0.94, y: 0.46, z: 1.61}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45514,8 +45515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  turnSpeed: 30
+  speed: 20
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!114 &804800867
 MonoBehaviour:
@@ -45532,7 +45533,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 804800866}
 --- !u!114 &804800868
@@ -45605,7 +45606,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -45658,7 +45659,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &804800873
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85976,7 +85977,7 @@ Transform:
   m_GameObject: {fileID: 1531169721}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9999254, z: 0, w: -0.012216864}
-  m_LocalPosition: {x: 1.17, y: 0.21, z: 11.39}
+  m_LocalPosition: {x: 1.17, y: 0.21, z: 9.94}
   m_LocalScale: {x: 13, y: 6.2999997, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91582,6 +91583,114 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623466674}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1623530181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623530182}
+  - component: {fileID: 1623530186}
+  - component: {fileID: 1623530185}
+  - component: {fileID: 1623530184}
+  m_Layer: 6
+  m_Name: Ceiling
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1623530182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623530181}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.7, y: 4.2, z: 19.6}
+  m_LocalScale: {x: 45.31, y: 1, z: 72.6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 727956585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1623530184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623530181}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1623530185
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623530181}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1623530186
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623530181}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1623969494
 GameObject:
@@ -113318,8 +113427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  turnSpeed: 10
+  speed: 20
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!114 &1981994705
 MonoBehaviour:
@@ -113336,7 +113445,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 1981994704}
 --- !u!114 &1981994706
@@ -113409,7 +113518,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -113462,7 +113571,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &1981994711
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -113568,8 +113677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  turnSpeed: 10
+  speed: 20
+  turnSpeed: 20
   checkpoints: {fileID: 1789901908}
 --- !u!114 &1984289457
 MonoBehaviour:
@@ -113586,7 +113695,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
+  MaxStep: 5000
   checkpoints: {fileID: 1789901908}
   car: {fileID: 1984289456}
 --- !u!114 &1984289458
@@ -113659,7 +113768,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Car
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -113712,7 +113821,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &1984289463
 MeshRenderer:
   m_ObjectHideFlags: 0

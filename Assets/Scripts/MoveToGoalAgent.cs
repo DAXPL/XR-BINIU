@@ -2,22 +2,18 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using System;
 using System.Collections;
 
 public class MoveToGoalAgent : Agent {
     [SerializeField] private Checkpoints checkpoints;
-    private Transform spawnPos;
-    private Vector3 spawnPosVector3;
     [SerializeField] private Car car;
+    private Vector3 lastPosition;
 
     private void Awake() {
         car = GetComponent<Car>();
     }
 
     private void Start() {
-        spawnPos = transform;
-        spawnPosVector3 = transform.position;
         checkpoints.OnCarCorrectCheckpoint += CorrectCheckpoint;
         checkpoints.OnCarWrongCheckpoint += WrongCheckpoint;
         StartCoroutine(CountDistance());
@@ -25,32 +21,35 @@ public class MoveToGoalAgent : Agent {
 
     private void CorrectCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
         if (e.carTransform == transform) {
-            AddReward(10f);
+            int index = checkpoints.GetNextCheckpointIndex(transform) + 1;
+            AddReward(index);
         }
     }
 
     private void WrongCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
         if (e.carTransform == transform) {
-            AddReward(-10f);
+            AddReward(-1f);
+            EndEpisode();
         }
     }
 
-    Vector3 lastPosition;
-    IEnumerator CountDistance() {
+    private IEnumerator CountDistance() {
         while (true) {
             lastPosition = transform.position;
             yield return new WaitForSeconds(1);
-            if (Vector3.Distance(transform.position, lastPosition) < 2) {
-                AddReward(-100f);
+
+            float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+            if (distanceMoved < 0.1f) {
+                AddReward(-1.0f);
+                EndEpisode();
             }
         }
     }
 
-
     public override void OnEpisodeBegin() {
         lastPosition = transform.position;
-        transform.position = spawnPosVector3;
-        transform.forward = spawnPos.forward;
+        transform.position = new Vector3(UnityEngine.Random.Range(-2.6f, 4.4f), 0.8f, UnityEngine.Random.Range(12f, 14f));
+        transform.forward = Vector3.forward;
         checkpoints.ResetCheckpoint(transform);
         car.Stop();
     }
@@ -99,21 +98,14 @@ public class MoveToGoalAgent : Agent {
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.TryGetComponent(out Wall _)) {
-            AddReward(-10f);
-        }
-
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        if (collision.gameObject.TryGetComponent(out Wall _)) {
-            AddReward(5f);
+            AddReward(-0.5f);
+            EndEpisode();
         }
     }
-
 
     private void OnCollisionStay(Collision collision) {
         if (collision.gameObject.TryGetComponent(out Wall _)) {
-            AddReward(-5f);
+            AddReward(-0.1f);
         }
     }
 }
