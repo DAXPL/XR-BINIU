@@ -10,6 +10,8 @@ public class Car : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
     }
 
+    public Rigidbody GetRigidBody() => rb;
+
     public void Drive(float forward, float turn) {
         rb.AddTorque(new Vector3(0, turn * turnSpeed, 0), ForceMode.Force);
         rb.AddForce(speed * forward * transform.forward, ForceMode.Force);

@@ -31,6 +31,8 @@ public class Checkpoints : MonoBehaviour {
         }
     }
 
+    public int GetCheckpointsCount() => checkpoints.Count;
+
     public void AgentThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform) {
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTranformList.IndexOf(carTransform)];
 

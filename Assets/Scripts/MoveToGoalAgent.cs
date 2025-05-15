@@ -17,12 +17,29 @@ public class MoveToGoalAgent : Agent {
         checkpoints.OnCarCorrectCheckpoint += CorrectCheckpoint;
         checkpoints.OnCarWrongCheckpoint += WrongCheckpoint;
         StartCoroutine(CountDistance());
+        Debug.Log(checkpoints.GetCheckpointsCount());
     }
 
     private void CorrectCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
         if (e.carTransform == transform) {
             int index = checkpoints.GetNextCheckpointIndex(transform) + 1;
-            AddReward(index);
+
+            if (index == checkpoints.GetCheckpointsCount()) {
+                CheckVelocity();
+                AddReward(index);
+                EndEpisode();
+                return;
+            }
+
+            AddReward(index / 2f);
+        }
+    }
+
+    private void CheckVelocity() {
+        Debug.Log(car.GetRigidBody().linearVelocity);
+
+        if (Mathf.Abs(car.GetRigidBody().linearVelocity.x) > 2 && Mathf.Abs(car.GetRigidBody().linearVelocity.z) > 7) {
+            AddReward(2f);
         }
     }
 
@@ -94,7 +111,6 @@ public class MoveToGoalAgent : Agent {
 
         car.Drive(forwardAmount, turnAmount);
     }
-
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.TryGetComponent(out Wall _)) {
