@@ -6,23 +6,18 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BoatWIFIdriver : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject connectionPanel;
-
-
-    [SerializeField] private int gear = 5;
-    private ClientWebSocket ws; // WebSocket client
-    public string serverAddress = "ws://192.168.0.39"; // Adres ESP32 (IP i port)
-    public int port = 80;
-    private CancellationTokenSource cts;
+    [SerializeField] private string serverAddress = "192.168.0.39";
+    private int port = 80;
     [SerializeField] private Breadboard breadboard;
-
+    private ClientWebSocket ws;
+    private CancellationTokenSource cts;
+    
     void OnApplicationQuit()
     {
         if (ws != null && ws.State == WebSocketState.Open)

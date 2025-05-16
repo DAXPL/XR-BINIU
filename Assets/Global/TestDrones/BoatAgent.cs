@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class BoatAgent : Agent
 {
+    [SerializeField] private Breadboard breadboard;
     private Vector3 initialPos;
     private Vector3 initialRot;
-    private Breadboard breadboard;
     private List<Transform> checkpoints = new List<Transform>();
     public int localCounter = 0;
     private void Start()
     {
         initialRot = transform.localEulerAngles;
         initialPos = transform.localPosition;
-        breadboard = GetComponent<Breadboard>();
+        if(!breadboard) breadboard = GetComponent<Breadboard>();
         if (breadboard != null && breadboard.GetControll())
         {
             Debug.Log("Breadboard is controllable");

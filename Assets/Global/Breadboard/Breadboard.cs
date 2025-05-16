@@ -7,6 +7,7 @@ public class Breadboard : MonoBehaviour
 
     [Header("Devices")]
     [SerializeField] private MonoBehaviour[] devices;
+    [SerializeField] private MonoBehaviour[] miscellaneous;
     [SerializeField] private VirtualSensor[] virtualSensors;
     [SerializeField] private VirtualMotor[] virtualMotors;
     private List<IPWMMotor> motors = new List<IPWMMotor>();
@@ -107,6 +108,14 @@ public class Breadboard : MonoBehaviour
     public void Release()
     {
         externalLogic = false;
+    }
+
+    public void ToggleMiscellaneous(int id, bool state) 
+    { 
+        if(id >= 0 && id < miscellaneous.Length)
+        {
+            miscellaneous[id].enabled = state;
+        }
     }
 }
 [System.Serializable]

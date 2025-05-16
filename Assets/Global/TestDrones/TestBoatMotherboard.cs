@@ -10,11 +10,13 @@ public class TestBoatMotherboard : DroneLogic
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference gearUp;
     [SerializeField] private InputActionReference gearDown;
+    [SerializeField] private InputActionReference setAutopilot;
 
     [SerializeField] private int gear = 5;
     [SerializeField] private bool readFromInputsystem = true;
     [SerializeField] private Vector2 input = Vector2.zero;
-
+    private bool changedInput = false;
+    private bool autopilot = false;
     public void SetGear(Single s)
     {
         gear = Mathf.Clamp(Mathf.RoundToInt(s * 10), 0, 10);
@@ -58,10 +60,34 @@ public class TestBoatMotherboard : DroneLogic
 
         if (moveAction != null)
             moveAction.action.Enable();
+
+        if (setAutopilot != null)
+        {
+            setAutopilot.action.performed += ctx =>
+            {
+                changedInput = true;
+                autopilot = !autopilot;
+            };
+            setAutopilot.action.Enable();
+        }
+    }
+
+    public void ToggleAutopilot()
+    {
+        changedInput = true;
+        autopilot = !autopilot;
     }
 
     public override void Think(Breadboard board, float deltaTime)
     {
+        if (changedInput)
+        {
+            changedInput = false;
+            if(autopilot) board.GetControll();
+            else board.Release();
+
+            board.ToggleMiscellaneous(0, autopilot);
+        }
         if (readFromInputsystem)
         {
             if (moveAction != null)
