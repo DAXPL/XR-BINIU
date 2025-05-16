@@ -11,19 +11,37 @@ public class TestBoatMotherboard : DroneLogic
     [SerializeField] private InputActionReference gearUp;
     [SerializeField] private InputActionReference gearDown;
 
-    private int gear = 5;
-    private bool initialized = false;
+    [SerializeField] private int gear = 5;
+    [SerializeField] private bool readFromInputsystem = true;
+    [SerializeField] private Vector2 input = Vector2.zero;
 
-    private void Initialize()
+    public void SetGear(Single s)
     {
-        initialized = true;
+        gear = Mathf.Clamp(Mathf.RoundToInt(s * 10), 0, 10);
+        readFromInputsystem = false;
+    }
 
+    public void SetTurn(Single s)
+    {
+        input.x += Mathf.Clamp((s-0.5f)*2.0f, -1f, 1f);
+        readFromInputsystem = false;
+    }
+
+    public void SetPower(Single s)
+    {
+        input.y = Mathf.Clamp((s - 0.5f) * 2.0f, -1f, 1f);
+        readFromInputsystem = false;
+    }
+    
+    public override void Initialize()
+    {
+        readFromInputsystem = true;
         if (gearUp != null)
         {
             gearUp.action.performed += ctx =>
             {
+                readFromInputsystem = true;
                 gear = Mathf.Clamp(gear + 1, 1, 10);
-                Debug.Log("Zwiêkszono bieg: " + gear);
             };
             gearUp.action.Enable();
         }
@@ -32,8 +50,8 @@ public class TestBoatMotherboard : DroneLogic
         {
             gearDown.action.performed += ctx =>
             {
+                readFromInputsystem = true;
                 gear = Mathf.Clamp(gear - 1, 1, 10);
-                Debug.Log("Zmniejszono bieg: " + gear);
             };
             gearDown.action.Enable();
         }
@@ -44,20 +62,20 @@ public class TestBoatMotherboard : DroneLogic
 
     public override void Think(Breadboard board, float deltaTime)
     {
-        if (!initialized) Initialize();
-
-        Vector2 input = Vector2.zero;
-        if (moveAction != null)
-            input = moveAction.action.ReadValue<Vector2>();
-
+        if (readFromInputsystem)
+        {
+            if (moveAction != null)
+            {
+                input = moveAction.action.ReadValue<Vector2>();
+            }
+        }
         // Skalowanie si³y sterowania przez bieg
-        input *= gear / 10f;
+        input *= (gear / 10f);
 
         float forward = Mathf.Max(0f, input.y);
-        float turn = input.x;
 
-        float leftPWM = Mathf.Clamp01(forward + turn);
-        float rightPWM = Mathf.Clamp01(forward - turn);
+        float leftPWM = Mathf.Clamp01(forward + input.x);
+        float rightPWM = Mathf.Clamp01(forward - input.x);
 
         board.SetMotorPWM(0, leftPWM);
         board.SetMotorPWM(1, rightPWM);

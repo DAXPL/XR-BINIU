@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: New Test Boat Motherboard
   m_EditorClassIdentifier: 
   moveAction: {fileID: -1680190386980627800, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
-  basePower: 0.5
-  turnPowerFactor: 0.5
+  gearUp: {fileID: -5680969616734057212, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
+  gearDown: {fileID: 951356070956142341, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
+  gear: 10
+  readFromInputsystem: 1
+  input: {x: 0, y: 0}

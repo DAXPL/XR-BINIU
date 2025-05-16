@@ -41,6 +41,13 @@ public class Breadboard : MonoBehaviour
                 Debug.LogWarning($"VirtualMotor {i} does not implement IPWMMotor");
         }
     }
+    private void Start()
+    {
+        if (logic != null)
+        {
+            logic.Initialize();
+        }
+    }
 
     private void Update()
     {
