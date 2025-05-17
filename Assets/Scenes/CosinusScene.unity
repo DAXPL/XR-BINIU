@@ -715,8 +715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &279433989
 MonoBehaviour:
@@ -803,7 +803,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -842,8 +842,8 @@ Rigidbody:
   m_GameObject: {fileID: 279433986}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2325,8 +2325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &804083183
 MonoBehaviour:
@@ -2413,7 +2413,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -2452,8 +2452,8 @@ Rigidbody:
   m_GameObject: {fileID: 804083180}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2575,8 +2575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &823327196
 MonoBehaviour:
@@ -2663,7 +2663,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -2702,8 +2702,8 @@ Rigidbody:
   m_GameObject: {fileID: 823327193}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2975,8 +2975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &920464641
 MonoBehaviour:
@@ -3063,7 +3063,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -3102,8 +3102,8 @@ Rigidbody:
   m_GameObject: {fileID: 920464638}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -3882,8 +3882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &1464360865
 MonoBehaviour:
@@ -3970,7 +3970,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -4009,8 +4009,8 @@ Rigidbody:
   m_GameObject: {fileID: 1464360862}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4594,8 +4594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432e913f52cea8844b0c3982eb12ba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 20
+  speed: 1500
+  turnSpeed: 700
   checkpoints: {fileID: 671851743}
 --- !u!114 &1581790880
 MonoBehaviour:
@@ -4682,7 +4682,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 084a74a818a53b448ad470b50acc7c31, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e5e5612d5ec90fe42b666bc46b533308, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Car
@@ -4721,8 +4721,8 @@ Rigidbody:
   m_GameObject: {fileID: 1581790877}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

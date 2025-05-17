@@ -17,16 +17,15 @@ public class MoveToGoalAgent : Agent {
         checkpoints.OnCarCorrectCheckpoint += CorrectCheckpoint;
         checkpoints.OnCarWrongCheckpoint += WrongCheckpoint;
         StartCoroutine(CountDistance());
-        Debug.Log(checkpoints.GetCheckpointsCount());
     }
 
     private void CorrectCheckpoint(object sender, Checkpoints.CarCheckpointEventArgs e) {
         if (e.carTransform == transform) {
             int index = checkpoints.GetNextCheckpointIndex(transform) + 1;
 
-            if (index == checkpoints.GetCheckpointsCount()) {
+            if (checkpoints.GetNextCheckpointIndex(transform) == 0) {
                 CheckVelocity();
-                AddReward(index);
+                AddReward(25f);
                 EndEpisode();
                 return;
             }
@@ -38,7 +37,7 @@ public class MoveToGoalAgent : Agent {
     private void CheckVelocity() {
         Debug.Log(car.GetRigidBody().linearVelocity);
 
-        if (Mathf.Abs(car.GetRigidBody().linearVelocity.x) > 2 && Mathf.Abs(car.GetRigidBody().linearVelocity.z) > 7) {
+        if (Mathf.Abs(car.GetRigidBody().linearVelocity.x) > 1 && Mathf.Abs(car.GetRigidBody().linearVelocity.z) > 5) {
             AddReward(2f);
         }
     }
@@ -113,14 +112,15 @@ public class MoveToGoalAgent : Agent {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.TryGetComponent(out Wall _)) {
+        if (collision.gameObject.CompareTag("Wall")) {
+            Debug.Log("A");
             AddReward(-0.5f);
             EndEpisode();
         }
     }
 
     private void OnCollisionStay(Collision collision) {
-        if (collision.gameObject.TryGetComponent(out Wall _)) {
+        if (collision.gameObject.CompareTag("Wall")) {
             AddReward(-0.1f);
         }
     }
