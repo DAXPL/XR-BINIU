@@ -2,31 +2,31 @@
     "Car": {
         "checkpoints": [
             {
-                "steps": 499970,
-                "file_path": "results\\ppo\\Car\\Car-499970.onnx",
+                "steps": 499998,
+                "file_path": "results\\ppo\\Car\\Car-499998.onnx",
                 "reward": null,
-                "creation_time": 1747465142.7853498,
+                "creation_time": 1747477081.6200864,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Car\\Car-499970.pt"
+                    "results\\ppo\\Car\\Car-499998.pt"
                 ]
             },
             {
-                "steps": 500034,
-                "file_path": "results\\ppo\\Car\\Car-500034.onnx",
-                "reward": 174.5,
-                "creation_time": 1747465142.82835,
+                "steps": 597652,
+                "file_path": "results\\ppo\\Car\\Car-597652.onnx",
+                "reward": null,
+                "creation_time": 1747477441.9103825,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Car\\Car-500034.pt"
+                    "results\\ppo\\Car\\Car-597652.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 500034,
+            "steps": 597652,
             "file_path": "results\\ppo\\Car.onnx",
-            "reward": 174.5,
-            "creation_time": 1747465142.82835,
+            "reward": null,
+            "creation_time": 1747477441.9103825,
             "auxillary_file_paths": [
-                "results\\ppo\\Car\\Car-500034.pt"
+                "results\\ppo\\Car\\Car-597652.pt"
             ]
         }
     },

@@ -25,12 +25,12 @@ public class MoveToGoalAgent : Agent {
 
             if (checkpoints.GetNextCheckpointIndex(transform) == 0) {
                 CheckVelocity();
-                AddReward(25f);
+                AddReward(100f);
                 EndEpisode();
                 return;
             }
 
-            AddReward(index / 2f);
+            AddReward(index / 5f);
         }
     }
 
@@ -64,7 +64,7 @@ public class MoveToGoalAgent : Agent {
 
     public override void OnEpisodeBegin() {
         lastPosition = transform.position;
-        transform.position = new Vector3(UnityEngine.Random.Range(47f, 51.5f), 0.8f, UnityEngine.Random.Range(-20f, -26.5f));
+        transform.position = new Vector3(UnityEngine.Random.Range(87f, 91f), 0.8f, UnityEngine.Random.Range(-3.3f, -6.8f));
         transform.forward = Vector3.forward;
         checkpoints.ResetCheckpoint(transform);
         car.Stop();
@@ -113,7 +113,6 @@ public class MoveToGoalAgent : Agent {
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Wall")) {
-            Debug.Log("A");
             AddReward(-0.5f);
             EndEpisode();
         }
