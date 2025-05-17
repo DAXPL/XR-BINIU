@@ -30,13 +30,11 @@ public class MoveToGoalAgent : Agent {
                 return;
             }
 
-            AddReward(index / 5f);
+            AddReward(index / 2f);
         }
     }
 
     private void CheckVelocity() {
-        Debug.Log(car.GetRigidBody().linearVelocity);
-
         if (Mathf.Abs(car.GetRigidBody().linearVelocity.x) > 1 && Mathf.Abs(car.GetRigidBody().linearVelocity.z) > 5) {
             AddReward(2f);
         }
@@ -64,7 +62,7 @@ public class MoveToGoalAgent : Agent {
 
     public override void OnEpisodeBegin() {
         lastPosition = transform.position;
-        transform.position = new Vector3(UnityEngine.Random.Range(87f, 91f), 0.8f, UnityEngine.Random.Range(-3.3f, -6.8f));
+        transform.position = new Vector3(UnityEngine.Random.Range(31f, 27f), 0.8f, UnityEngine.Random.Range(-40.6f, -43.4f));        
         transform.forward = Vector3.forward;
         checkpoints.ResetCheckpoint(transform);
         car.Stop();

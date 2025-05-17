@@ -1,10 +1,10 @@
 using UnityEngine;
 
 public class Car : MonoBehaviour {
+    [SerializeField] private float speed = 20;
+    [SerializeField] private float turnSpeed = 20;
+    [SerializeField] private Checkpoints checkpoints;
     private Rigidbody rb;
-    public float speed = 20;
-    public float turnSpeed = 20;
-    public Checkpoints checkpoints;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -13,35 +13,22 @@ public class Car : MonoBehaviour {
     public Rigidbody GetRigidBody() => rb;
 
     public void Drive(float forward, float turn) {
-        //rb.AddTorque(new Vector3(0, turn * turnSpeed, 0), ForceMode.Force);
-        //rb.AddForce(speed * forward * transform.forward, ForceMode.Force);
-
-        //// Calculate movement
-        //Vector3 moveDirection = transform.forward * forward * speed * Time.deltaTime;
-        //Quaternion turnRotation = Quaternion.Euler(0f, turn * turnSpeed * Time.deltaTime, 0f);
-
-        //// Apply movement and rotation
-        //rb.MovePosition(rb.position + moveDirection);
-        //rb.MoveRotation(rb.rotation * turnRotation);
-
-
-        // Apply forward/backward force
-        rb.AddForce(transform.forward * forward * speed * Time.fixedDeltaTime, ForceMode.Force);
-        rb.AddTorque(Vector3.up * turn * turnSpeed * Time.fixedDeltaTime, ForceMode.Force);
+        rb.AddForce(forward * speed * Time.fixedDeltaTime * transform.forward, ForceMode.Force);
+        rb.AddTorque(Time.fixedDeltaTime * turn * turnSpeed * Vector3.up, ForceMode.Force);
     }
 
     private void FixedUpdate() {
         float forward = 0f;
         float turn = 0f;
 
-        if (Input.GetKey("w"))
+        if (Input.GetKey(KeyCode.W))
             forward = 1f;
-        else if (Input.GetKey("s"))
+        else if (Input.GetKey(KeyCode.S))
             forward = -1f;
 
-        if (Input.GetKey("a"))
+        if (Input.GetKey(KeyCode.A))
             turn = -1f;
-        else if (Input.GetKey("d"))
+        else if (Input.GetKey(KeyCode.D))
             turn = 1f;
 
         Drive(forward, turn);
