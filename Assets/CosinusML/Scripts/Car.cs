@@ -13,6 +13,14 @@ public class Car : MonoBehaviour {
     public Rigidbody GetRigidBody() => rb;
 
     public void Drive(float forward, float turn) {
+        if (forward == 0) {
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, Time.fixedDeltaTime * 2f);
+        }
+
+        if (turn == 0) {
+            rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * 0.5f);
+        }
+
         rb.AddForce(forward * speed * Time.fixedDeltaTime * transform.forward, ForceMode.Force);
         rb.AddTorque(Time.fixedDeltaTime * turn * turnSpeed * Vector3.up, ForceMode.Force);
     }
@@ -39,4 +47,6 @@ public class Car : MonoBehaviour {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
+
+   
 }

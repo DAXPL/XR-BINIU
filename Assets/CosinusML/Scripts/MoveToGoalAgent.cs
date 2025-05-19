@@ -30,7 +30,7 @@ public class MoveToGoalAgent : Agent {
                 return;
             }
 
-            AddReward(index / 2f);
+            AddReward(index/2);
         }
     }
 
