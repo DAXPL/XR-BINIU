@@ -24,8 +24,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SG_LocalVolumetricFogCaustics
-  m_Shader: {fileID: -6465566751694194690, guid: b793eaf312048784c93fcaf763687dc4,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b793eaf312048784c93fcaf763687dc4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

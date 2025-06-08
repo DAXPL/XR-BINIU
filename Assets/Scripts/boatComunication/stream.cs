@@ -29,19 +29,12 @@ public class stream : MonoBehaviour
         {
             yield return www.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
-            if (www.result != UnityWebRequest.Result.Success)
-#else
-            if (www.isNetworkError || www.isHttpError)
-#endif
-            {
-                Debug.LogWarning("B³¹d pobierania: " + www.error);
-            }
-            else
+            if (www.result == UnityWebRequest.Result.Success)
             {
                 Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
                 displayImage.texture = tex;
             }
+            yield return null;
         }
     }
 }
